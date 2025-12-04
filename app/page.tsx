@@ -133,20 +133,20 @@ export default function Home() {
         <div className="max-w-6xl mx-auto text-center">
 
           <div className="flex justify-center gap-6 mb-4">
-            <a className="text-gray-700 text-lg hover:text-blue-600 transition font-medium" href="/privacy">
+            <a className="text-gray-700 text-md hover:text-blue-600 transition font-medium" href="/privacy">
               Privacy Policy
             </a>
 
-            <a className="text-gray-700 text-lg hover:text-blue-600 transition font-medium" href="/terms">
+            <a className="text-gray-700 text-md hover:text-blue-600 transition font-medium" href="/terms">
               Terms of Service
             </a>
 
-            <a className="text-gray-700 text-lg hover:text-blue-600 transition font-medium" href="/health-safety">
+            <a className="text-gray-700 text-md hover:text-blue-600 transition font-medium" href="/health-safety">
               Health & Safety
             </a>
 
         <a 
-  className="text-gray-700 text-lg hover:text-blue-600 transition font-medium" 
+  className="text-gray-700 text-md hover:text-blue-600 transition font-medium" 
   href="/support"
 >
   Support
