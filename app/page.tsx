@@ -96,7 +96,7 @@ export default function Home() {
 
           <ScreenPreview 
             img="mockup2.png"
-            title="Technique Breakdown"
+            title="Drill Demonstrations"
             text="Learn proper mechanics with clear drill demonstrations."
           />
 
@@ -121,7 +121,7 @@ export default function Home() {
           <ScreenPreview 
             img="mockup4.png"
             title="Session Organization"
-            text="Keep your training structured and consistent."
+            text="Keep your training structured and consistent. Push and drag the cards to reorder them"
           />
 
         </div>
