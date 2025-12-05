@@ -8,40 +8,38 @@ export default function AuthCallbackPage() {
   const [message, setMessage] = useState("");
 
   useEffect(() => {
+    const supabase = createBrowserClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+    );
+
     async function handleCallback() {
-      const supabase = createBrowserClient(
-        process.env.NEXT_PUBLIC_SUPABASE_URL!,
-        process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-      );
+      const url = new URL(window.location.href);
+      const token_hash = url.searchParams.get("token_hash");
+      const type = url.searchParams.get("type");
 
-      // Extract tokens from URL fragment
-      const hash = window.location.hash.substring(1);
-      const params = new URLSearchParams(hash);
-
-      const access_token = params.get("access_token");
-      const refresh_token = params.get("refresh_token");
-
-      if (!access_token || !refresh_token) {
+      if (!token_hash || !type) {
         setStatus("error");
-        setMessage("Invalid or expired confirmation link.");
+        setMessage("Invalid confirmation link.");
         return;
       }
 
-      // Save session to Supabase
-      const { error } = await supabase.auth.setSession({
-        access_token,
-        refresh_token,
+      // 🔥 THIS is the missing step
+      const { data, error } = await supabase.auth.verifyOtp({
+        type: "email",
+        token_hash,
       });
 
       if (error) {
+        console.error(error);
         setStatus("error");
-        setMessage("Authentication failed. Please try again.");
+        setMessage("Error confirming your email.");
         return;
       }
 
-      // Success
+      // success!
       setStatus("success");
-      setMessage("Your email has been confirmed! Redirecting…");
+      setMessage("Your email has been confirmed! Redirecting...");
 
       setTimeout(() => {
         window.location.href = "/";
@@ -56,17 +54,9 @@ export default function AuthCallbackPage() {
       <div className="max-w-md w-full bg-white p-10 rounded-xl shadow text-center">
         <h1 className="text-2xl font-bold mb-4">VaultBuddy</h1>
 
-        {status === "loading" && (
-          <p className="text-gray-600">Validating your confirmation link…</p>
-        )}
-
-        {status === "success" && (
-          <p className="text-green-600 font-medium">{message}</p>
-        )}
-
-        {status === "error" && (
-          <p className="text-red-600 font-medium">{message}</p>
-        )}
+        {status === "loading" && <p>Validating your confirmation link…</p>}
+        {status === "success" && <p className="text-green-600">{message}</p>}
+        {status === "error" && <p className="text-red-600">{message}</p>}
       </div>
     </main>
   );
