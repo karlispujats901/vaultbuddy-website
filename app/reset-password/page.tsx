@@ -1,7 +1,10 @@
 "use client";
 
 export const dynamic = "force-dynamic";
+export const revalidate = 0;
+export const fetchCache = "force-no-store";
 
+import { Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { createClient } from "@supabase/supabase-js";
@@ -11,7 +14,7 @@ const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
 );
 
-export default function ResetPasswordPage() {
+function ResetPasswordContent() {
   const searchParams = useSearchParams();
   const token = searchParams.get("access_token");
 
@@ -24,15 +27,10 @@ export default function ResetPasswordPage() {
       return;
     }
 
-    const { error } = await supabase.auth.updateUser({
-      password,
-    });
+    const { error } = await supabase.auth.updateUser({ password });
 
-    if (error) {
-      setMessage(error.message);
-    } else {
-      setMessage("Password updated! You can now log in.");
-    }
+    if (error) setMessage(error.message);
+    else setMessage("Password updated! You can now log in.");
   };
 
   return (
@@ -57,5 +55,13 @@ export default function ResetPasswordPage() {
         {message && <p className="mt-4 text-center">{message}</p>}
       </div>
     </div>
+  );
+}
+
+export default function ResetPasswordPage() {
+  return (
+    <Suspense fallback={<div>Loading…</div>}>
+      <ResetPasswordContent />
+    </Suspense>
   );
 }
