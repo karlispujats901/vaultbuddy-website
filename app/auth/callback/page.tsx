@@ -1,63 +1,70 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { createBrowserClient } from "@supabase/ssr";
+import { Suspense } from "react";
 
-export default function AuthCallbackPage() {
-  const [status, setStatus] = useState<"loading" | "success" | "error">("loading");
+export const dynamic = "force-dynamic";
+export const fetchCache = "force-no-store";
+export const revalidate = 0;
+
+import { useSearchParams } from "next/navigation";
+import { useState } from "react";
+import { createClient } from "@supabase/supabase-js";
+
+const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+);
+
+function ResetPasswordContent() {
+  const searchParams = useSearchParams();
+  const token = searchParams.get("access_token");
+
+  const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
 
-  useEffect(() => {
-    const supabase = createBrowserClient(
-      process.env.NEXT_PUBLIC_SUPABASE_URL!,
-      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-    );
-
-    async function handleCallback() {
-      const url = new URL(window.location.href);
-      const token_hash = url.searchParams.get("token_hash");
-      const type = url.searchParams.get("type");
-
-      if (!token_hash || !type) {
-        setStatus("error");
-        setMessage("Invalid confirmation link.");
-        return;
-      }
-
-      // 🔥 THIS is the missing step
-      const { data, error } = await supabase.auth.verifyOtp({
-        type: "email",
-        token_hash,
-      });
-
-      if (error) {
-        console.error(error);
-        setStatus("error");
-        setMessage("Error confirming your email.");
-        return;
-      }
-
-      // success!
-      setStatus("success");
-      setMessage("Your email has been confirmed! Redirecting...");
-
-      setTimeout(() => {
-        window.location.href = "/";
-      }, 2000);
+  const handleReset = async () => {
+    if (!token) {
+      setMessage("Invalid or missing recovery token.");
+      return;
     }
 
-    handleCallback();
-  }, []);
+    const { error } = await supabase.auth.updateUser({
+      password,
+    });
+
+    if (error) setMessage(error.message);
+    else setMessage("Password updated! You can now log in.");
+  };
 
   return (
-    <main className="min-h-screen flex items-center justify-center bg-gray-100 px-6">
-      <div className="max-w-md w-full bg-white p-10 rounded-xl shadow text-center">
-        <h1 className="text-2xl font-bold mb-4">VaultBuddy</h1>
+    <div className="min-h-screen flex items-center justify-center p-6">
+      <div className="max-w-md w-full bg-white p-8 rounded-xl shadow-md">
+        <h1 className="text-2xl font-bold mb-4">Reset Password</h1>
 
-        {status === "loading" && <p>Validating your confirmation link…</p>}
-        {status === "success" && <p className="text-green-600">{message}</p>}
-        {status === "error" && <p className="text-red-600">{message}</p>}
+        <input
+          type="password"
+          placeholder="New password"
+          className="w-full p-3 border rounded mb-4"
+          onChange={(e) => setPassword(e.target.value)}
+        />
+
+        <button
+          className="w-full bg-blue-600 text-white py-3 rounded"
+          onClick={handleReset}
+        >
+          Update Password
+        </button>
+
+        {message && <p className="mt-4 text-center">{message}</p>}
       </div>
-    </main>
+    </div>
+  );
+}
+
+export default function ResetPasswordPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <ResetPasswordContent />
+    </Suspense>
   );
 }
