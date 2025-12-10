@@ -1,11 +1,6 @@
 "use client";
 
-// export const dynamic = "force-dynamic";
-// export const revalidate = 0;
-// export const fetchCache = "force-no-store";
-
-import { Suspense } from "react";
-import { useSearchParams } from "next/navigation";
+import { Suspense, useEffect } from "react";
 import { useState } from "react";
 import { createClient } from "@supabase/supabase-js";
 
@@ -15,11 +10,19 @@ const supabase = createClient(
 );
 
 function ResetPasswordContent() {
-  const searchParams = useSearchParams();
-  const token = searchParams.get("access_token");
-
+  const [token, setToken] = useState<string | null>(null);
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
+
+  useEffect(() => {
+    const hash = window.location.hash.slice(1);
+    const params = new URLSearchParams(hash);
+    const t = params.get("access_token");
+    setToken(t);
+
+    // optional: clean url
+    window.history.replaceState({}, "", "/reset-password");
+  }, []);
 
   const handleReset = async () => {
     if (!token) {
