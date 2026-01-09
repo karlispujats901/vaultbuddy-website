@@ -1,6 +1,25 @@
+"use client"
+
+import { useEffect } from "react";
 import Link from "next/link";
 
 export default function Home() {
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    const hash = window.location.hash;
+
+    // 🔐 Supabase dashboard password recovery
+    if (
+      hash.includes("access_token") &&
+      hash.includes("type=recovery")
+    ) {
+      window.location.replace(
+        "/reset-password" + hash
+      );
+    }
+  }, []);
   return (
     <main className="min-h-screen">
 
