@@ -13,7 +13,7 @@ export default function Home() {
       <span className="text-2xl font-semibold tracking-tight text-gray-800">
         VaultBuddy
       </span>
-      <span className="text-sm text-gray-500 -mt-1">by Pujati</span>
+      <span className="text-sm text-gray-500 -mt-1">by Pujati LLC</span>
     </div>
   </Link>
 </header>
@@ -154,7 +154,7 @@ export default function Home() {
           </div>
 
           <p className="text-gray-500 mt-4 text-sm">
-            © 2026 Pujati — VaultBuddy by Pujati
+            © 2026 Pujati LLC — VaultBuddy by Pujati
           </p>
         </div>
       </footer>
