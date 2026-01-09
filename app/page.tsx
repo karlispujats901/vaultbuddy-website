@@ -22,9 +22,9 @@ export default function Home() {
 
 // ✉️ Email change confirmation
   if (hash.includes("type=email_change")) {
-    alert("Email updated successfully. Please log in again.");
+    // alert("Email updated successfully. Please log in again.");
     // Optional: clear hash
-    window.history.replaceState({}, "", "/");
+    window.location.replace("/auth-confirmed");
   }
 
 
