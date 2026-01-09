@@ -10,37 +10,42 @@ const supabase = createClient(
 );
 
 function ResetPasswordContent() {
-  const [token, setToken] = useState<string | null>(null);
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
 
+  // ✅ Let Supabase establish the recovery session
   useEffect(() => {
-    const hash = window.location.hash.slice(1);
-    const params = new URLSearchParams(hash);
-    const t = params.get("access_token");
-    setToken(t);
+    const { data } = supabase.auth.onAuthStateChange((event) => {
+      if (event === "PASSWORD_RECOVERY") {
+        setMessage("You can now set a new password.");
+      }
+    });
 
-    // Remove token from URL
-    window.history.replaceState({}, "", "/reset-password");
+    return () => data.subscription.unsubscribe();
   }, []);
 
   const handleReset = async () => {
-    if (!token) return setMessage("Invalid or missing recovery token.");
-    if (!password.trim()) return setMessage("Password cannot be empty.");
+    if (!password.trim()) {
+      return setMessage("Password cannot be empty.");
+    }
 
     const { error } = await supabase.auth.updateUser({ password });
 
-    setMessage(error ? error.message : "Password updated! You can now log in.");
+    setMessage(
+      error ? error.message : "Password updated! You can now log in."
+    );
   };
 
   return (
     <div className="min-h-screen bg-gray-50">
-
-      {/* ⭐ HEADER (copied from homepage) */}
+      {/* HEADER */}
       <header className="w-full py-6 px-8 flex items-center max-w-6xl mx-auto">
         <Link href="/" className="flex items-center">
-          <img src="/logo.png" alt="VaultBuddy Logo" className="w-14 h-14 mr-3" />
-
+          <img
+            src="/logo.png"
+            alt="VaultBuddy Logo"
+            className="w-14 h-14 mr-3"
+          />
           <div className="flex flex-col">
             <span className="text-2xl font-semibold tracking-tight text-gray-800">
               VaultBuddy
@@ -53,7 +58,9 @@ function ResetPasswordContent() {
       {/* PAGE CONTENT */}
       <div className="flex items-center justify-center px-4 mt-6">
         <div className="w-full max-w-md">
-          <h1 className="text-3xl font-bold text-center mb-2">Reset Password</h1>
+          <h1 className="text-3xl font-bold text-center mb-2">
+            Reset Password
+          </h1>
           <p className="text-center text-gray-600 mb-6">
             Choose a new password for your account.
           </p>
@@ -78,7 +85,9 @@ function ResetPasswordContent() {
             </button>
 
             {message && (
-              <p className="mt-4 text-center text-gray-700 text-sm">{message}</p>
+              <p className="mt-4 text-center text-gray-700 text-sm">
+                {message}
+              </p>
             )}
           </div>
         </div>
