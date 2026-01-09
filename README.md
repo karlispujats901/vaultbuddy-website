@@ -1,2 +1,2 @@
 # vaultbuddy-website
-Official website for VaultBuddy by Pujati
+Official website for VaultBuddy by Pujati LLC
