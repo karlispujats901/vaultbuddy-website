@@ -12,41 +12,58 @@ const supabase = createClient(
 function ResetPasswordContent() {
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
+  const [ready, setReady] = useState(false);
 
   /* -------------------------------------------------
-     🔑 CRITICAL: Exchange recovery code for session
-     (REQUIRED on desktop browsers)
+     🔑 Establish recovery session (PKCE + Implicit)
   ------------------------------------------------- */
   useEffect(() => {
-    const exchange = async () => {
-      const { error } =
-        await supabase.auth.exchangeCodeForSession(
-          window.location.href
-        );
+    const handleRecovery = async () => {
+      const url = window.location.href;
 
-      if (error) {
-        setMessage(error.message);
-      }
-    };
+      // 🟢 PKCE flow (desktop browsers)
+      if (url.includes("code=")) {
+        const { error } =
+          await supabase.auth.exchangeCodeForSession(url);
 
-    exchange();
-  }, []);
-
-  /* -------------------------------------------------
-     Listen for recovery state (optional UX feedback)
-  ------------------------------------------------- */
-  useEffect(() => {
-    const { data } = supabase.auth.onAuthStateChange(
-      (event) => {
-        if (event === "PASSWORD_RECOVERY") {
-          setMessage("You can now set a new password.");
+        if (error) {
+          setMessage(error.message);
+          return;
         }
       }
-    );
 
-    return () => data.subscription.unsubscribe();
+      // 🟢 Implicit flow (mobile / Safari)
+      if (window.location.hash.includes("access_token")) {
+        const hash = window.location.hash.slice(1);
+        const params = new URLSearchParams(hash);
+
+        const access_token = params.get("access_token");
+        const refresh_token = params.get("refresh_token");
+
+        if (access_token && refresh_token) {
+          const { error } = await supabase.auth.setSession({
+            access_token,
+            refresh_token,
+          });
+
+          if (error) {
+            setMessage(error.message);
+            return;
+          }
+        }
+      }
+
+      // Clean URL
+      window.history.replaceState({}, "", "/reset-password");
+      setReady(true);
+    };
+
+    handleRecovery();
   }, []);
 
+  /* -------------------------------------------------
+     Update password
+  ------------------------------------------------- */
   const handleReset = async () => {
     if (!password.trim()) {
       return setMessage("Password cannot be empty.");
@@ -60,6 +77,14 @@ function ResetPasswordContent() {
       error ? error.message : "Password updated! You can now log in."
     );
   };
+
+  if (!ready) {
+    return (
+      <div className="min-h-screen flex items-center justify-center text-gray-600">
+        Preparing secure password reset…
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gray-50">
