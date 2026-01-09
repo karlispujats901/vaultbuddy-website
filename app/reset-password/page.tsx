@@ -13,13 +13,36 @@ function ResetPasswordContent() {
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
 
-  // ✅ Let Supabase establish the recovery session
+  /* -------------------------------------------------
+     🔑 CRITICAL: Exchange recovery code for session
+     (REQUIRED on desktop browsers)
+  ------------------------------------------------- */
   useEffect(() => {
-    const { data } = supabase.auth.onAuthStateChange((event) => {
-      if (event === "PASSWORD_RECOVERY") {
-        setMessage("You can now set a new password.");
+    const exchange = async () => {
+      const { error } =
+        await supabase.auth.exchangeCodeForSession(
+          window.location.href
+        );
+
+      if (error) {
+        setMessage(error.message);
       }
-    });
+    };
+
+    exchange();
+  }, []);
+
+  /* -------------------------------------------------
+     Listen for recovery state (optional UX feedback)
+  ------------------------------------------------- */
+  useEffect(() => {
+    const { data } = supabase.auth.onAuthStateChange(
+      (event) => {
+        if (event === "PASSWORD_RECOVERY") {
+          setMessage("You can now set a new password.");
+        }
+      }
+    );
 
     return () => data.subscription.unsubscribe();
   }, []);
@@ -29,7 +52,9 @@ function ResetPasswordContent() {
       return setMessage("Password cannot be empty.");
     }
 
-    const { error } = await supabase.auth.updateUser({ password });
+    const { error } = await supabase.auth.updateUser({
+      password,
+    });
 
     setMessage(
       error ? error.message : "Password updated! You can now log in."
@@ -50,7 +75,9 @@ function ResetPasswordContent() {
             <span className="text-2xl font-semibold tracking-tight text-gray-800">
               VaultBuddy
             </span>
-            <span className="text-sm text-gray-500 -mt-1">by Pujati</span>
+            <span className="text-sm text-gray-500 -mt-1">
+              by Pujati
+            </span>
           </div>
         </Link>
       </header>
