@@ -19,6 +19,15 @@ export default function Home() {
         "/reset-password" + hash
       );
     }
+
+// ✉️ Email change confirmation
+  if (hash.includes("type=email_change")) {
+    alert("Email updated successfully. Please log in again.");
+    // Optional: clear hash
+    window.history.replaceState({}, "", "/");
+  }
+
+
   }, []);
   return (
     <main className="min-h-screen">
