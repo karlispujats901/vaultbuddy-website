@@ -13,6 +13,8 @@ function ResetPasswordContent() {
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
   const [ready, setReady] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+
 
   /* -------------------------------------------------
      🔑 Establish recovery session (PKCE + Implicit)
@@ -122,12 +124,24 @@ function ResetPasswordContent() {
               New Password
             </label>
 
+           <div className="relative mb-4">
             <input
-              type="password"
+              type={showPassword ? "text" : "password"}
               placeholder="Enter your new password"
-              className="w-full p-3 bg-gray-100 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:outline-none mb-4"
+              className="w-full p-3 pr-12 bg-gray-100 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:outline-none"
               onChange={(e) => setPassword(e.target.value)}
             />
+
+            <button
+              type="button"
+              onClick={() => setShowPassword(!showPassword)}
+              className="absolute inset-y-0 right-3 flex items-center text-gray-500 hover:text-gray-700"
+              aria-label={showPassword ? "Hide password" : "Show password"}
+            >
+              {showPassword ? "🙈" : "👁️"}
+            </button>
+          </div>
+
 
             <button
               className="w-full bg-blue-600 hover:bg-blue-700 transition text-white font-semibold py-3 rounded-xl"
