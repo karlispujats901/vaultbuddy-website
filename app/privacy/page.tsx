@@ -5,7 +5,7 @@ export default function PrivacyPage() {
     <main className="min-h-screen text-gray-900">
 
       {/* HEADER */}
-   <header className="w-full py-6 px-8 flex items-center max-w-6xl mx-auto">
+      <header className="w-full py-6 px-8 flex items-center max-w-6xl mx-auto">
         <Link href="/" className="flex items-center">
           <img src="/logo.png" alt="VaultBuddy Logo" className="w-14 h-14 mr-3" />
 
@@ -13,10 +13,11 @@ export default function PrivacyPage() {
             <span className="text-2xl font-semibold tracking-tight text-gray-800">
               VaultBuddy
             </span>
-            <span className="text-sm text-gray-500 -mt-1">by Pujati</span>
+            <span className="text-sm text-gray-500 -mt-1">by Pujati LLC</span>
           </div>
         </Link>
       </header>
+
       {/* CONTENT */}
       <section className="px-6 py-20 bg-white">
         <div className="max-w-3xl mx-auto">
@@ -29,7 +30,7 @@ export default function PrivacyPage() {
 
           {/* INTRO */}
           <p className="text-gray-700 text-lg leading-relaxed mb-8">
-            At VaultBuddy by Pujati, your privacy is extremely important to us.
+            At VaultBuddy by Pujati LLC, your privacy is extremely important to us.
             This Privacy Policy explains what information we collect, how we use it,
             and how we keep it secure. By using the VaultBuddy app or website,
             you agree to the terms outlined below.
@@ -46,7 +47,6 @@ export default function PrivacyPage() {
           <ul className="list-disc ml-6 space-y-3 text-gray-700 text-lg leading-relaxed">
             <li><strong>Account Information:</strong> Email address (only if you create an account).</li>
             <li><strong>User-Generated Data:</strong> Vault setups, routines, and preferences you save inside the app.</li>
-            <li><strong>Cloud Sync Data (Optional):</strong> If you enable syncing, your routines and vault setups may be stored securely on our servers.</li>
             <li><strong>Subscription Information:</strong> Payments are processed by Apple or Google. VaultBuddy does not receive your credit card details.</li>
             <li><strong>Anonymous Analytics:</strong> We collect anonymous usage data to improve performance and understand how features are used. This data does not identify you.</li>
           </ul>
@@ -56,7 +56,6 @@ export default function PrivacyPage() {
 
           <ul className="list-disc ml-6 space-y-3 text-gray-700 text-lg leading-relaxed">
             <li>To allow you to save vault setups and training routines.</li>
-            <li>To sync your data across devices (only if you enable cloud sync).</li>
             <li>To improve app performance through anonymous analytics.</li>
             <li>To provide customer support and respond to inquiries.</li>
           </ul>
@@ -66,7 +65,7 @@ export default function PrivacyPage() {
 
           <p className="text-gray-700 text-lg leading-relaxed mb-6">
             Your routines, vault setups, and preferences may be stored locally on your device,
-            or in the cloud if you choose to create an account or enable syncing.
+            or in the cloud if you choose to create an account.
             All data is stored securely. We do not sell your data or share it with advertisers.
           </p>
 
@@ -79,9 +78,10 @@ export default function PrivacyPage() {
           <h2 className="text-2xl font-semibold mt-12 mb-4">4. Third-Party Services</h2>
 
           <p className="text-gray-700 text-lg leading-relaxed mb-6">
-            VaultBuddy may use trusted third-party tools for authentication, subscriptions,
-            analytics, or data storage. These services are used only to operate the app
-            and cannot use your information for their own purposes.
+            VaultBuddy may use trusted third-party services for authentication,
+            subscriptions (Apple App Store or Google Play), analytics, and cloud data storage.
+            These services are used solely to operate and improve the app and are not
+            permitted to use your information for their own marketing purposes.
           </p>
 
           {/* SECTION 5 */}
@@ -93,11 +93,11 @@ export default function PrivacyPage() {
           </p>
 
           {/* SECTION 6 */}
-          <h2 className="text-2xl font-semibold mt-12 mb-4">6. Children's Privacy</h2>
+          <h2 className="text-2xl font-semibold mt-12 mb-4">6. Children&apos;s Privacy</h2>
 
           <p className="text-gray-700 text-lg leading-relaxed mb-6">
-            VaultBuddy is not intended for children under 13. We do not knowingly collect
-            personal information from minors.
+            VaultBuddy is not intended for children under the age of 13.
+            We do not knowingly collect personal information from children under 13.
           </p>
 
           {/* SECTION 7 */}
@@ -109,6 +109,11 @@ export default function PrivacyPage() {
 
           <p className="text-blue-600 font-semibold text-lg mb-8">
             support@pujati.com
+          </p>
+
+          <p className="text-gray-700 text-lg leading-relaxed mb-6">
+            If you delete your account, we will delete or anonymize associated personal
+            data within a reasonable timeframe, unless retention is required by law.
           </p>
 
           {/* GDPR */}
@@ -124,8 +129,8 @@ export default function PrivacyPage() {
           <h2 className="text-2xl font-semibold mt-12 mb-4">8. Changes to This Policy</h2>
 
           <p className="text-gray-700 text-lg leading-relaxed mb-6">
-            We may update this Privacy Policy from time to time. Updates will be posted on
-            this page with a revised date.
+            We may update this Privacy Policy from time to time.
+            Updates will be posted on this page with a revised date.
           </p>
 
         </div>

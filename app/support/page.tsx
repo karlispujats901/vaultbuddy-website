@@ -1,5 +1,3 @@
-
-
 "use client";
 import Link from "next/link";
 import { useState } from "react";
@@ -9,8 +7,6 @@ export default function SupportPage() {
     <main className="min-h-screen text-gray-900">
 
       {/* HEADER */}
-
-
       <header className="w-full py-6 px-8 flex items-center max-w-6xl mx-auto">
         <Link href="/" className="flex items-center">
           <img src="/logo.png" alt="VaultBuddy Logo" className="w-14 h-14 mr-3" />
@@ -19,7 +15,7 @@ export default function SupportPage() {
             <span className="text-2xl font-semibold tracking-tight text-gray-800">
               VaultBuddy
             </span>
-            <span className="text-sm text-gray-500 -mt-1">by Pujati</span>
+            <span className="text-sm text-gray-500 -mt-1">by Pujati LLC</span>
           </div>
         </Link>
       </header>
@@ -31,7 +27,7 @@ export default function SupportPage() {
           {/* TITLE */}
           <h1 className="text-4xl font-bold mb-6">Support</h1>
           <p className="text-gray-700 text-lg leading-relaxed mb-6">
-            Need help with VaultBuddy? We're here to assist you.
+            Need help with VaultBuddy? We’re here to assist you.
           </p>
 
           {/* CONTACT SUPPORT */}
@@ -44,6 +40,12 @@ export default function SupportPage() {
             >
               support@pujati.com
             </a>
+          </p>
+
+          <p className="text-gray-600 text-base mb-8">
+            We typically respond within 1–2 business days. For account-related,
+            privacy, or data deletion requests, please email us from the address
+            associated with your VaultBuddy account.
           </p>
 
           {/* FAQ SECTION */}
@@ -66,7 +68,7 @@ export default function SupportPage() {
 
           <FAQItem
             question="Will more features be added to VaultBuddy?"
-            answer="Yes. Planned additions include more drills, enhanced routine-building tools, progress tracking, improved vault setup tools."
+            answer="Yes. Planned additions include more drills, enhanced routine-building tools, progress tracking, and improved vault setup tools."
           />
 
         </div>
@@ -85,7 +87,6 @@ function FAQItem({ question, answer }: { question: string; answer: string }) {
 
   return (
     <div className="border-b border-gray-200 py-4">
-      {/* Question */}
       <button
         className="w-full flex justify-between items-center text-left text-lg font-medium text-gray-800"
         onClick={() => setOpen(!open)}
@@ -94,7 +95,6 @@ function FAQItem({ question, answer }: { question: string; answer: string }) {
         <span className="text-gray-500">{open ? "−" : "+"}</span>
       </button>
 
-      {/* Answer */}
       {open && (
         <p className="mt-3 text-gray-600 text-base leading-relaxed">
           {answer}

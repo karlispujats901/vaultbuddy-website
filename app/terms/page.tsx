@@ -5,18 +5,18 @@ export default function TermsPage() {
     <main className="min-h-screen text-gray-900">
 
       {/* HEADER */}
-<header className="w-full py-6 px-8 flex items-center max-w-6xl mx-auto">
-  <Link href="/" className="flex items-center">
-    <img src="/logo.png" alt="VaultBuddy Logo" className="w-14 h-14 mr-3" />
+      <header className="w-full py-6 px-8 flex items-center max-w-6xl mx-auto">
+        <Link href="/" className="flex items-center">
+          <img src="/logo.png" alt="VaultBuddy Logo" className="w-14 h-14 mr-3" />
 
-    <div className="flex flex-col">
-      <span className="text-2xl font-semibold tracking-tight text-gray-800">
-        VaultBuddy
-      </span>
-      <span className="text-sm text-gray-500 -mt-1">by Pujati</span>
-    </div>
-  </Link>
-</header>
+          <div className="flex flex-col">
+            <span className="text-2xl font-semibold tracking-tight text-gray-800">
+              VaultBuddy
+            </span>
+            <span className="text-sm text-gray-500 -mt-1">by Pujati LLC</span>
+          </div>
+        </Link>
+      </header>
 
       {/* CONTENT */}
       <section className="px-6 py-20 bg-white">
@@ -31,7 +31,7 @@ export default function TermsPage() {
           {/* INTRO */}
           <p className="text-gray-700 text-lg leading-relaxed mb-8">
             These Terms of Service (“Terms”) govern your access to and use of the VaultBuddy
-            app and website. VaultBuddy is a product of <strong>Pujati</strong>. By downloading,
+            app and website. VaultBuddy is a product of <strong>Pujati LLC</strong>. By downloading,
             accessing, or using VaultBuddy, you agree to be bound by these Terms.
           </p>
 
@@ -42,8 +42,22 @@ export default function TermsPage() {
             You agree to use the app responsibly and in compliance with all applicable laws.
           </p>
 
+          <p className="text-gray-700 text-lg leading-relaxed mb-6">
+            VaultBuddy grants you a limited, non-exclusive, non-transferable, revocable license
+            to use the app for personal, non-commercial purposes in accordance with these Terms.
+          </p>
+
+          {/* AGE REQUIREMENT */}
+          <h2 className="text-2xl font-semibold mt-12 mb-4">Age Requirement</h2>
+          <p className="text-gray-700 text-lg leading-relaxed mb-6">
+            You must be at least 13 years old to use VaultBuddy. By using the app, you represent
+            that you meet this age requirement.
+          </p>
+
           {/* SECTION 2 */}
-          <h2 className="text-2xl font-semibold mt-12 mb-4">2. No Professional Coaching or Medical Advice</h2>
+          <h2 className="text-2xl font-semibold mt-12 mb-4">
+            2. No Professional Coaching or Medical Advice
+          </h2>
           <p className="text-gray-700 text-lg leading-relaxed mb-6">
             VaultBuddy provides training information for educational purposes only.
             It is not a substitute for professional coaching, medical advice, or supervised training.
@@ -82,7 +96,7 @@ export default function TermsPage() {
           {/* SECTION 6 */}
           <h2 className="text-2xl font-semibold mt-12 mb-4">6. Subscription & Payments</h2>
           <p className="text-gray-700 text-lg leading-relaxed mb-6">
-            If VaultBuddy offers paid features or subscriptions, all purchases are processed 
+            If VaultBuddy offers paid features or subscriptions, all purchases are processed
             through the Apple App Store or Google Play Store. Payments are handled by the store provider,
             and VaultBuddy does not receive your payment details. Refunds must be requested directly
             through Apple or Google.
@@ -92,7 +106,7 @@ export default function TermsPage() {
           <h2 className="text-2xl font-semibold mt-12 mb-4">7. Intellectual Property</h2>
           <p className="text-gray-700 text-lg leading-relaxed mb-6">
             All content within the VaultBuddy app—including logos, design, images, text, videos,
-            and software—is owned by Pujati and protected by copyright and trademark laws.
+            and software—is owned by Pujati LLC and protected by copyright and trademark laws.
             You may not copy, distribute, or reproduce any part of the app without permission.
           </p>
 
@@ -107,14 +121,14 @@ export default function TermsPage() {
           <h2 className="text-2xl font-semibold mt-12 mb-4">9. Termination</h2>
           <p className="text-gray-700 text-lg leading-relaxed mb-6">
             We may suspend or terminate your access to VaultBuddy if you violate these Terms
-            or misuse the app.
+            or misuse the app. You may stop using VaultBuddy or delete your account at any time.
           </p>
 
           {/* SECTION 10 */}
           <h2 className="text-2xl font-semibold mt-12 mb-4">10. Limitation of Liability</h2>
           <p className="text-gray-700 text-lg leading-relaxed mb-6">
-            To the fullest extent permitted by law, VaultBuddy and Pujati are not responsible 
-            for injuries, damages, or losses related to the use of the app. Training in sports 
+            To the fullest extent permitted by law, VaultBuddy and Pujati LLC are not responsible
+            for injuries, damages, or losses related to the use of the app. Training in sports
             such as pole vaulting carries inherent risk. You use the app at your own discretion.
           </p>
 
@@ -129,7 +143,7 @@ export default function TermsPage() {
           {/* CHANGES */}
           <h2 className="text-2xl font-semibold mt-12 mb-4">12. Changes to These Terms</h2>
           <p className="text-gray-700 text-lg leading-relaxed mb-6">
-            We may update these Terms periodically. When we do, the updated Terms will be posted 
+            We may update these Terms periodically. When we do, the updated Terms will be posted
             on this page with a revised “Last updated” date.
           </p>
 

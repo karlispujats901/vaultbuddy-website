@@ -103,7 +103,7 @@ function ResetPasswordContent() {
               VaultBuddy
             </span>
             <span className="text-sm text-gray-500 -mt-1">
-              by Pujati
+              by Pujati LLC
             </span>
           </div>
         </Link>

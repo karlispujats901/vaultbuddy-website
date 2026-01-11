@@ -13,7 +13,7 @@ export default function HealthSafetyPage() {
             <span className="text-2xl font-semibold tracking-tight text-gray-800">
               VaultBuddy
             </span>
-            <span className="text-sm text-gray-500 -mt-1">by Pujati</span>
+            <span className="text-sm text-gray-500 -mt-1">by Pujati LLC</span>
           </div>
         </Link>
       </header>
@@ -70,9 +70,11 @@ export default function HealthSafetyPage() {
             4. No Liability for Injuries
           </h2>
           <p className="text-gray-700 text-lg leading-relaxed mb-6">
-            To the fullest extent permitted by law, VaultBuddy and Pujati are not responsible
+            To the fullest extent permitted by law, VaultBuddy and Pujati LLC are not responsible
             for any injuries, accidents, damages, or losses that occur as a result
             of using the app or performing training activities inspired by it.
+            You expressly assume all risks associated with such activities, and
+            VaultBuddy makes no guarantees regarding outcomes or results.
           </p>
 
           {/* SECTION 5 */}
